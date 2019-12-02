@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>AF-Connect mock IdP</title>
+    <link href="/css/style.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div class="login-container">
+      <form onsubmit="onLogin(); return false;">
+        <div class="login-row">
+          <div class="login-header">
+            <h1>AF-Connect</h1>
+            <h2>Mock IdP</h2>
+          </div>
+        </div>
+        <div class="login-row">
+          <div class="input-row">
+            <input id="username" type="text" placeholder="Enter username"></input>
+          </div>
+          <div class="input-row">
+            <input id="password" type="text" placeholder="Enter password"></input>
+          </div>
+        </div>
+        <div class="login-row">
+          <button type="submit">LOGIN</button>
+        </div>
+      </form>
+    </div>
+    <script src="/js/main.js"></script>
+  </body>
+</html>
