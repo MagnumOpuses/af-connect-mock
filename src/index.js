@@ -1,12 +1,23 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
+const fs = require("fs");
 const app = express();
 const config = require("./config");
 
 const auth = require("./auth");
 
 const credentials = require("./dataset-mock");
+const http = require("http");
+const https = require("https");
+
+const privateKey = fs.readFileSync(config.pkey, "utf8");
+const certificate = fs.readFileSync(config.sslcert, "utf8");
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(
+  { key: privateKey, cert: certificate },
+  app
+);
 
 app.set("views", __dirname + "/../views");
 app.set("view engine", "ejs");
@@ -18,6 +29,7 @@ app.use("/css", express.static(__dirname + "/../public/css"));
 app.use("/js", express.static(__dirname + "/../public/js"));
 
 app.get("/AuthenticationDispatcher/Dispatch", (req, res, next) => {
+  console.log("Return Login page");
   res.render("pages/login");
 });
 
@@ -31,6 +43,7 @@ app.post("/AuthenticationDispatcher/Dispatch", (req, res, next) => {
         credential.password === json.password
     );
     if (user !== undefined) {
+      console.log("AUTH -> SSO for user", user.username);
       resolve({ status: 200, message: user });
     } else {
       resolve({ status: 401, message: "Invalid login" });
@@ -51,19 +64,68 @@ app.post("/AuthenticationDispatcher/Dispatch", (req, res, next) => {
 });
 
 app.get("/jwt/rest/idp/v0/klientID", (req, res, next) => {
-  // Get the value of header 'AMV_SSO_COOKIE' and find it in the credentials.
-  // Return the following json object in response.
-  // { token: "cookie value" }
-  res.json({ token: "abc" });
+  const sso = getCookie(req.headers.cookie, "AMV_SSO_COOKIE");
+  return new Promise((resolve, reject) => {
+    const user = credentials.find(credential => credential.sso === sso);
+    if (user !== undefined) {
+      console.log("SSO -> JWT for user: ", user.username);
+      res.send(user.jwt);
+    } else {
+      res.status(401).send("Invalid sso cookie");
+    }
+  });
 });
 
-app.get("/envelop", (req, res, next) => {
-  // Use header: 'X-JWT-Assertion' with value jwt token
-  // Provide a body with the following data:
-  // { status: 200, body: {envelope} }
-  res.send("Envelop page");
-});
+app.get(
+  "/arbetssokandeprofil/rest/af/v1/arbetssokandeprofil/arbetssokandeprofiler",
+  (req, res, next) => {
+    const jwtToken = req.headers["x-jwt-assertion"];
+    return new Promise((resolve, reject) => {
+      const user = credentials.find(
+        credential => credential.jwt.token === jwtToken
+      );
+      if (user !== undefined) {
+        console.log("JWT -> jobSeekerProfile for user: ", user.username);
+        res.send(user.jobSeekerProfile);
+      } else {
+        res.status(401).send("Invalid sso cookie");
+      }
+    });
+  }
+);
 
-app.listen(config.PORT, () => {
-  console.log(`Server running HTTP on port ${config.PORT}`);
-});
+app.get(
+  "/arbetssokande/rest/af/v1/arbetssokande/externa-personuppgifter",
+  (req, res, next) => {
+    const jwtToken = req.headers["x-jwt-assertion"];
+    return new Promise((resolve, reject) => {
+      const user = credentials.find(
+        credential => credential.jwt.token === jwtToken
+      );
+      if (user !== undefined) {
+        console.log("JWT -> externalPersonalDetails for user: ", user.username);
+        res.send(user.externalPersonalDetails);
+      } else {
+        res.status(401).send("Invalid sso cookie");
+      }
+    });
+  }
+);
+
+httpsServer.listen(config.SSL_PORT, config.HOST, () =>
+  console.log(`AF Connect Mock listening on port: ${config.SSL_PORT} !`)
+);
+
+httpServer.listen(config.PORT, config.HOST, () =>
+  console.log(`AF Connect Mock listening on port: ${config.PORT} !`)
+);
+
+let getCookie = (cookieString, name) => {
+  let value = "; " + cookieString;
+  let parts = value.split("; " + name + "=");
+  if (parts.length == 2)
+    return parts
+      .pop()
+      .split(";")
+      .shift();
+};
