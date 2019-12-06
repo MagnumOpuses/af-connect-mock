@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
 const ejs = require("ejs");
 const fs = require("fs");
 const app = express();
@@ -11,8 +12,8 @@ const credentials = require("./dataset-mock");
 const http = require("http");
 const https = require("https");
 
-const privateKey = fs.readFileSync(config.pkey, "utf8");
-const certificate = fs.readFileSync(config.sslcert, "utf8");
+const privateKey = fs.readFileSync(path.resolve(__dirname, config.pkey), "utf8");
+const certificate = fs.readFileSync(path.resolve(__dirname, config.sslcert), "utf8");
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(
   { key: privateKey, cert: certificate },
