@@ -49,10 +49,10 @@ _Read move about environment configuration here: [dotenv](https://github.com/mot
    This `.env` file is ignored by the rules set in `.gitignore`, therefore in this file you may freely customizable the deployment to your own needs.
 
    ```
-   PORT: 9998,
-   SSL_PORT: 9999,
-   pkey: "./private.key",
-   sslcert: "./certficate.crt"
+   PORT = 9998,
+   SSL_PORT = 9999,
+   PKEY = './cert_and_key/private.key'
+   SSLCERT = './cert_and_key/certficate.crt'
    ```
 
 ## Test
