@@ -1,0 +1,13 @@
+version: '3'
+services:
+  outbox:
+    build: .
+    links: 
+      - redis
+    ports:
+      - "8100:8100"
+    depends_on:
+      - redis
+  redis:
+    container_name: "redis-db"
+    image: "redis:latest"
