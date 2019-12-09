@@ -19,8 +19,13 @@ Operating this mocking service in development mode utilizes [Nodemon](https://no
 No versions yet.
 
 ## Getting started
-
-No getting started guidelines yet.
+- Cretate self signed Certificate and private key.
+- Create .env file in project root directory
+##### Run with docker (Quick start)
+- Create docker image
+ From project root directory: docker build -t af-connect-mock:latest .
+ Run docker image:
+ docker run --env-file=.env -v C:\<absolute Path to>\cert_and_key:/dist/app/src/cert_and_key af-connect-mock:latest
 
 ### Prerequisites
 
@@ -49,10 +54,10 @@ _Read move about environment configuration here: [dotenv](https://github.com/mot
    This `.env` file is ignored by the rules set in `.gitignore`, therefore in this file you may freely customizable the deployment to your own needs.
 
    ```
-   PORT: 9998,
-   SSL_PORT: 9999,
-   pkey: "./private.key",
-   sslcert: "./certficate.crt"
+   PORT=9998,
+   SSL_PORT=9999,
+   pkey="./private.key",
+   sslcert="./certficate.crt"
    ```
 
 ## Test
