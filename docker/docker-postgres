@@ -1,4 +1,5 @@
 FROM postgres:12-alpine
+#APIManager-Mock
 EXPOSE 5432:5432
 COPY ./docker/ /tmp/docker
 WORKDIR /tmp/docker

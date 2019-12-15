@@ -10,15 +10,15 @@ const auth = require("./auth");
 
 const credentials = require("./dataset-mock");
 const http = require("http");
-//const https = require("https");
+const https = require("https");
 
-//const privateKey = fs.readFileSync(path.resolve(__dirname, config.pkey), "utf8");
-//const certificate = fs.readFileSync(path.resolve(__dirname, config.sslcert), "utf8");
+const privateKey = fs.readFileSync(path.resolve(__dirname, config.pkey), "utf8");
+const certificate = fs.readFileSync(path.resolve(__dirname, config.sslcert), "utf8");
 const httpServer = http.createServer(app);
-//const httpsServer = https.createServer(
-//  { key: privateKey, cert: certificate },
-//  app
-//);
+const httpsServer = https.createServer(
+  { key: privateKey, cert: certificate },
+  app
+);
 
 app.set("views", __dirname + "/../views");
 app.set("view engine", "ejs");
@@ -113,9 +113,9 @@ app.get(
   }
 );
 
-//httpsServer.listen(config.SSL_PORT, config.HOST, () =>
-//  console.log(`AF Connect Mock listening on port: ${config.SSL_PORT} !`)
-//);
+httpsServer.listen(config.SSL_PORT, config.HOST, () =>
+  console.log(`AF Connect Mock listening on port: ${config.SSL_PORT} !`)
+);
 
 httpServer.listen(config.PORT, config.HOST, () =>
   console.log(`AF Connect Mock listening on port: ${config.PORT} !`)

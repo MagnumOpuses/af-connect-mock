@@ -25,7 +25,8 @@ No versions yet.
 - Create docker image
  From project root directory: docker build -t af-connect-mock:latest .
  Run docker image:
- docker run --env-file=.env -v C:\<absolute Path to>\cert_and_key:/dist/app/src/cert_and_key af-connect-mock:latest
+  docker run -p 9999:9999 -p 9998:9998 -e PKEY=/dist/cert_and_key/privatekey.pem -e \
+   SSLCERT=/dist/cert_and_key/certificate.crt -t jobtechdev/af-connect-mock
 
 ### Prerequisites
 
