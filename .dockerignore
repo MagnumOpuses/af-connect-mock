@@ -3,4 +3,4 @@
 **/node_modules
 **/openshift
 **/.env
-**/cert_and_key
+cert_and_key

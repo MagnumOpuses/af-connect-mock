@@ -1,6 +1,17 @@
 version: '3'
 services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
   outbox:
     build: .
     ports:
-      - "8100:8100"
+      - "9999:9999"
+      - "9998:9998"
