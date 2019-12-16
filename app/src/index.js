@@ -113,13 +113,21 @@ app.get(
   }
 );
 
-httpsServer.listen(config.SSL_PORT, config.HOST, () =>
-  console.log(`AF Connect Mock listening on port: ${config.SSL_PORT} !`)
-);
-
-httpServer.listen(config.PORT, config.HOST, () =>
-  console.log(`AF Connect Mock listening on port: ${config.PORT} !`)
-);
+if (config.HOST === "localhost") {
+  httpsServer.listen(config.SSL_PORT, () =>
+      console.log(`AF Connect Mock listening on port: ${config.SSL_PORT} !`)
+  );
+  httpServer.listen(config.PORT, () =>
+      console.log(`AF Connect Mock listening on port: ${config.PORT} !`)
+  );
+} else {
+  httpsServer.listen(config.SSL_PORT, config.HOST, () =>
+      console.log(`AF Connect Mock listening on port: ${config.SSL_PORT} !`)
+  );
+  httpServer.listen(config.PORT, config.HOST, () =>
+      console.log(`AF Connect Mock listening on port: ${config.PORT} !`)
+  );
+}
 
 let getCookie = (cookieString, name) => {
   let value = "; " + cookieString;
