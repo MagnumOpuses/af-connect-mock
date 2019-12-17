@@ -58,7 +58,7 @@ _Read move about environment configuration here: [dotenv](https://github.com/mot
    PORT=9998,
    SSL_PORT=9999,
    pkey="./private.key",
-   sslcert="./certficate.crt"
+   sslcert="./certificate.crt"
    ```
 
 ## Test
