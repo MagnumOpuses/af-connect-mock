@@ -50,6 +50,12 @@ app.post("/AuthenticationDispatcher/Dispatch", (req, res, next) => {
     }
   })
     .then(result => {
+      if (config.ssoDomain !== undefined) {
+        result.message.ssoDomain = config.ssoDomain;
+      }
+      return result;
+    })
+    .then(result => {
       if (!result || !result.status || !result.message) {
         throw ("Unknown response status from auth, result: ", result);
       } else {
