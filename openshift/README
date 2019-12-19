@@ -1,0 +1,30 @@
+Create a Config Map for certificate and key
+Ref. ConfigMap from DeploymentConfig, snippet from DeploymentConfig:
+...
+...
+ volumeMounts:
+            - mountPath: /certs_and_keys/certificate.pem
+              name: certificatefile
+              subPath: certificate.pem
+            - mountPath: /certs_and_keys/key.pem
+              name: keyfile
+              subPath: key.pem
+...
+...
+...
+...
+  volumes:
+          - configMap:
+              defaultMode: 420
+              name: certificate-map
+            name: certificatefile
+          - configMap:
+              defaultMode: 420
+              name: key-map
+             name: keyfile
+
+
+
+References
+----------
+https://docs.openshift.com/container-platform/3.10/dev_guide/configmaps.html

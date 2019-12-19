@@ -2,10 +2,14 @@
   "name": "af-connect-mock",
   "version": "1.0.0",
   "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MagnumOpuses/af-connect-mock.git"
+  },
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
+    "start": "node app/src/index.js",
+    "dev": "nodemon app/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -15,7 +19,8 @@
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.1"

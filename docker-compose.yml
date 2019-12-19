@@ -1,0 +1,7 @@
+version: '3'
+services:
+  af-connect-mock:
+    build: .
+    ports:
+      - "9999:9999"
+      - "9998:9998"

@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
 const ejs = require("ejs");
 const fs = require("fs");
 const app = express();
@@ -11,8 +12,8 @@ const credentials = require("./dataset-mock");
 const http = require("http");
 const https = require("https");
 
-const privateKey = fs.readFileSync(config.pkey, "utf8");
-const certificate = fs.readFileSync(config.sslcert, "utf8");
+const privateKey = fs.readFileSync(path.resolve(__dirname, config.pkey), "utf8");
+const certificate = fs.readFileSync(path.resolve(__dirname, config.sslcert), "utf8");
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(
   { key: privateKey, cert: certificate },
@@ -118,13 +119,21 @@ app.get(
   }
 );
 
-httpsServer.listen(config.SSL_PORT, config.HOST, () =>
-  console.log(`AF Connect Mock listening on port: ${config.SSL_PORT} !`)
-);
-
-httpServer.listen(config.PORT, config.HOST, () =>
-  console.log(`AF Connect Mock listening on port: ${config.PORT} !`)
-);
+if (config.HOST === "localhost") {
+  httpsServer.listen(config.SSL_PORT, () =>
+      console.log(`AF Connect Mock listening on port: ${config.SSL_PORT} !`)
+  );
+  httpServer.listen(config.PORT, () =>
+      console.log(`AF Connect Mock listening on port: ${config.PORT} !`)
+  );
+} else {
+  httpsServer.listen(config.SSL_PORT, config.HOST, () =>
+      console.log(`AF Connect Mock listening on port: ${config.SSL_PORT} !`)
+  );
+  httpServer.listen(config.PORT, config.HOST, () =>
+      console.log(`AF Connect Mock listening on port: ${config.PORT} !`)
+  );
+}
 
 let getCookie = (cookieString, name) => {
   let value = "; " + cookieString;
