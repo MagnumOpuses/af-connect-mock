@@ -23,8 +23,12 @@ const onLogin = () => {
       switch (xhr.status) {
         case 200:
           const json = JSON.parse(xhr.response);
-          document.cookie = SSO_COOKIE_NAME + "=" + json.sso + ";path=/";
-          console.log("CT_ORIG_URL: ", CT_ORIG_URL);
+          let cookie = SSO_COOKIE_NAME + "=" + json.sso + ";path=/";
+          if (json.ssoDomain !== undefined) {
+            cookie += ";domain=" + json.ssoDomain;
+          }
+          document.cookie = cookie;
+
           if (CT_ORIG_URL) {
             window.location.href = CT_ORIG_URL;
           }
