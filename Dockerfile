@@ -13,8 +13,8 @@ RUN npm install
 # If you are building your code for production
 # RUN npm ci --only=production
 # API https
-EXPOSE 9999:9999
+EXPOSE 9999
 #API http
-EXPOSE 9998:9998
+EXPOSE 9998
 
 CMD [ "npm", "run-script", "start" ]

@@ -1,10 +1,12 @@
 FROM postgres:12-alpine
 #APIManager-Mock
-EXPOSE 5432:5432
-COPY ./docker/ /tmp/docker
-WORKDIR /tmp/docker
-RUN cp -r ./init-db.d/* /docker-entrypoint-initdb.d && \
+#USER 70
+EXPOSE 5432
+COPY ./docker/ /db-build
+WORKDIR /db-build
+RUN cp -r ./apimanager-db/init-db.d/* /docker-entrypoint-initdb.d && \
     chmod -R 777 /docker-entrypoint-initdb.d
+
 
 
 

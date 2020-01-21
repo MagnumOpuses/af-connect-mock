@@ -7,4 +7,4 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
     GRANT ALL PRIVILEGES ON DATABASE apimanager TO apimanager;
 EOSQL
 
-psql apimanager < ./apimanager-db/apimanager-db-seed.sql
+psql apimanager < ./apimanager-db-seed.sql
