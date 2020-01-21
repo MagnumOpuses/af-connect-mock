@@ -16,15 +16,18 @@ Operating this mocking service in development mode utilizes [Nodemon](https://no
 
 ## Versions, current dev state and future
 
-No versions yet.
+v1.0.0
 
 ## Getting started
+
 - Cretate self signed Certificate and private key.
 - Create .env file in project root directory
+
 ##### Run with docker (Quick start)
+
 - Create docker image
- From project root directory: docker build -t af-connect-mock:latest .
- Run docker image:
+  From project root directory: docker build -t af-connect-mock:latest .
+  Run docker image:
   docker run -p 9999:9999 -p 9998:9998 -e PKEY=/dist/cert_and_key/privatekey.pem -e \
    SSLCERT=/dist/cert_and_key/certificate.crt -t jobtechdev/af-connect-mock
 
