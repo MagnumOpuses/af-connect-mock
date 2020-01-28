@@ -18,6 +18,10 @@ const onLogin = () => {
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "/AuthenticationDispatcher/Dispatch", true);
   xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.addEventListener("error", function(event) {
+    console.error("There was a problem communicating with the server");
+    alert("There was a problem communicating with the server");
+  });
   xhr.onreadystatechange = function() {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       switch (xhr.status) {
@@ -35,14 +39,21 @@ const onLogin = () => {
           break;
         case 401:
           console.warn("Invalid login credentials");
+          alert("Invalid login credentials");
           break;
         default:
-          console.error("Unexpected error");
+          console.error("Unexpected error", xhr);
           break;
       }
     }
   };
-  xhr.send(JSON.stringify({ username, password }));
+
+  try {
+    xhr.send(JSON.stringify({ username, password }));
+  } catch (err) {
+    console.error("There was a problem communicating with the server");
+    alert("There was a problem communicating with the server");
+  }
 };
 
 function findGetParameter(parameterName) {
