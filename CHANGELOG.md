@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Possibility to insert an extra apikey to database based upon provided environment variable "EXTRA_KEY".
+
 ### Fixed
 
 - Removed unused property "cv" from dataset mock details.

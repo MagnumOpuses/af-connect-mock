@@ -84,6 +84,7 @@ ALTER TABLE ONLY public.apikeys ALTER COLUMN id SET DEFAULT nextval('public.apik
 
 COPY public.apikeys (apikey, api_id, userinfo, email, ticket, sent, visited, application_id, id) FROM stdin;
 dummydummydummydummydummydummydummydummydummydummy	1	{"name": "Dummy", "surname": "Dummy", "description": "Dummy api key", "company_name": "Dummy", "application_name": "Dummy"}	dummy.dummy@arbetsformedlingen.se	DUMMYDUMMYDUMMYDUMMYDUMMYDUMMYDU	1	2019-05-16 10:10:10.531158+00	Dummy	5
+dummykey	1	{"name": "Dummykey", "surname": "Dummykey", "description": "Dummykey api key", "company_name": "Dummykey", "application_name": "Dummykey"}	dummykey.dummykey@arbetsformedlingen.se	DUMMYKEYDUMMYKEYDUMMYKEYDUMMYKEY	1	2020-01-28 11:53:32+00	Dummykey	6
 \.
 
 
