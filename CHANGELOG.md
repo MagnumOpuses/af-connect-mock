@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Removed unused property "cv" from dataset mock details.
 - Display error alert to user upon login failure
 
 ## [1.0.0]
