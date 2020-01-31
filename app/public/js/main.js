@@ -29,7 +29,11 @@ const onLogin = () => {
           const json = JSON.parse(xhr.response);
           let cookie = SSO_COOKIE_NAME + "=" + json.sso + ";path=/";
           if (json.ssoDomain !== undefined) {
-            cookie += ";domain=" + json.ssoDomain;
+            cookie += ";domain=." + json.ssoDomain;
+          } else {
+            const split = location.hostname.split(".");
+            const tld = split.slice(split.length - 2).join(".");
+            cookie += ";domain=." + tld;
           }
           document.cookie = cookie;
 
