@@ -32,8 +32,8 @@ const onLogin = () => {
             cookie += ";domain=." + json.ssoDomain;
           } else {
             const split = location.hostname.split(".");
-            const tld = split.slice(split.length - 2).join(".");
-            cookie += ";domain=." + tld;
+            const sld = split.slice(split.length - 2).join(".");
+            cookie += ";domain=." + sld;
           }
           document.cookie = cookie;
 
