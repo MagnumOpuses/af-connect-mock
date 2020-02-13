@@ -31,15 +31,16 @@ app.set("views", __dirname + "/../views");
 app.set("view engine", "ejs");
 app.engine("html", ejs.__express);
 
-app.use(
-  "/health",
-  health({
+health.startServer({
+  host: config.HOST,
+  port: config.HEALTH_PORT,
+  health: {
     compatibleWith: {
       "af-connect": "^1.0.0-beta",
       "af-portability": "^1.0.0-beta"
     }
-  })
-);
+  }
+});
 
 app.use(bodyParser.text({ type: "application/json" }));
 
