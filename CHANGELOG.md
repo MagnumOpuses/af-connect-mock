@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Service "/health" endpoint
+
 ### Fixed
 
 - Always set domain property of SSO cookie upon successful login. The cookie domain can explicitly be set by environment/config variable, otherwise the application will try to extract the SLD to be used as cookie domain.

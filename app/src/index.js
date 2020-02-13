@@ -11,9 +11,16 @@ const auth = require("./auth");
 const credentials = require("./dataset-mock");
 const http = require("http");
 const https = require("https");
+const health = require("./health");
 
-const privateKey = fs.readFileSync(path.resolve(__dirname, config.pkey), "utf8");
-const certificate = fs.readFileSync(path.resolve(__dirname, config.sslcert), "utf8");
+const privateKey = fs.readFileSync(
+  path.resolve(__dirname, config.pkey),
+  "utf8"
+);
+const certificate = fs.readFileSync(
+  path.resolve(__dirname, config.sslcert),
+  "utf8"
+);
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(
   { key: privateKey, cert: certificate },
@@ -23,6 +30,16 @@ const httpsServer = https.createServer(
 app.set("views", __dirname + "/../views");
 app.set("view engine", "ejs");
 app.engine("html", ejs.__express);
+
+app.use(
+  "/health",
+  health({
+    compatibleWith: {
+      "af-connect": "^1.0.0-beta",
+      "af-portability": "^1.0.0-beta"
+    }
+  })
+);
 
 app.use(bodyParser.text({ type: "application/json" }));
 
@@ -121,17 +138,17 @@ app.get(
 
 if (config.HOST === "localhost") {
   httpsServer.listen(config.SSL_PORT, () =>
-      console.log(`AF Connect Mock listening on port: ${config.SSL_PORT} !`)
+    console.log(`AF Connect Mock listening on port: ${config.SSL_PORT} !`)
   );
   httpServer.listen(config.PORT, () =>
-      console.log(`AF Connect Mock listening on port: ${config.PORT} !`)
+    console.log(`AF Connect Mock listening on port: ${config.PORT} !`)
   );
 } else {
   httpsServer.listen(config.SSL_PORT, config.HOST, () =>
-      console.log(`AF Connect Mock listening on port: ${config.SSL_PORT} !`)
+    console.log(`AF Connect Mock listening on port: ${config.SSL_PORT} !`)
   );
   httpServer.listen(config.PORT, config.HOST, () =>
-      console.log(`AF Connect Mock listening on port: ${config.PORT} !`)
+    console.log(`AF Connect Mock listening on port: ${config.PORT} !`)
   );
 }
 
