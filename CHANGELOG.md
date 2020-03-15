@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Service "/health" endpoint
+- Using 'check-connectivity' module to serve health endpoint.
 
 ### Fixed
 
