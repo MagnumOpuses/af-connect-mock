@@ -4,7 +4,7 @@ metadata:
     name: af-connect-mock
     annotations:
         openshift.io/display-name: 'AF-Connect Mock PISA Service.'
-        description: "A Node.js application with a Postgres database."
+        description: "A Node.js application with a Postgres database for Mocking the PISA Service"
         tags: 'nodejs,postgres,mock'
         iconClass: icon-nodejs
         openshift.io/documentation-url: '${SOURCE_REPOSITORY_URL}'
@@ -22,10 +22,15 @@ objects:
         spec:
             ports:
                 -
-                    name: http
-                    port: 8100
+                    name: 9998-tcp
                     protocol: TCP
-                    targetPort: 8100
+                    port: 9998
+                    targetPort: 9998
+                -
+                    name: 9999-tcp
+                    protocol: TCP
+                    port: 9999
+                    targetPort: 9999
             selector:
                 deploymentconfig: '${APPLICATION_NAME}'
     -
@@ -67,11 +72,25 @@ objects:
                             image: >-
                                 image-registry.openshift-image-registry.svc:5000/'${NAMESPACE}'/'${APPLICATION_NAME}'
                             ports:
-                                - containerPort: 8100
-                                  protocol: TCP
-                            env: 
-                                - name: REDIS_HOST
-                                  value: '${REDIS_HOST}'
+                                - 
+                                    containerPort: 9998
+                                    protocol: TCP
+                                - 
+                                    containerPort: 9999
+                                    protocol: TCP
+                            env:
+                                -
+                                    name: HOST
+                                    value: '${HOST}'
+                                -
+                                    name: PKEY
+                                    value: '${PKEY}'
+                                -
+                                    name: SSLCERT
+                                    value: '${SSLCERT}'
+                                -
+                                    name: SSO_DOMAIN
+                                    value: '${SSO_DOMAIN}'
                     restartPolicy: Always
                     terminationGracePeriodSeconds: 30
                     dnsPolicy: ClusterFirst
@@ -86,11 +105,6 @@ parameters:
         required: true
         value: af-connect-mock
     -
-        name: APPLICATION_PORT
-        displayName: Port
-        required: true
-        value: '8100'
-    -
         name: NAMESPACE
         displayName: Namespace
         description: 'The OpenShift Namespace where the ImageStream resides.'
@@ -101,7 +115,7 @@ parameters:
         displayName: 'Git Repository URL'
         description: 'The URL of the repository with your application source code.'
         required: true
-        value: 'https://github.com/MagnumOpuses/af-connect-outbox.git'
+        value: 'https://github.com/MagnumOpuses/af-connect-mock.git'
     -
         name: SOURCE_REPOSITORY_REF
         displayName: 'Git Reference'
@@ -125,3 +139,15 @@ parameters:
         description: 'A secret string used to configure the Generic webhook.'
         generate: expression
         from: '[a-zA-Z0-9]{40}'
+    -
+        name: HOST
+        value: localhost
+    -
+        name: PKEY
+        value: '/dist/cert_and_key/privatekey.pem'
+    -
+        name: SSLCERT
+        value: '/dist/cert_and_key/certificate.crt'
+    -
+        name: SSO_DOMAIN
+        value: '.test.services.jtech.se'
