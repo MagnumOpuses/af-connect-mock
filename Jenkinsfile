@@ -22,7 +22,7 @@ pipeline {
                 expression {
                     openshift.withCluster() {
                         openshift.withProject("${cicdProjectNamespace}") {
-                            return !openshift.selector("template", "${applicationName}").exists();
+                            return !openshift.selector("bc", "${applicationName}").exists();
                         }
                     }
                 }
