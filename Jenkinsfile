@@ -1,8 +1,6 @@
-def devProjectNamespace = "af-connect-dev"
 def cicdProjectNamespace = "af-connect-cicd"
+def template = "./infrastructure/openshift/build-template.yml"
 def applicationName = "af-connect-mock"
-def gitRepo = "https://github.com/MagnumOpuses/af-connect-mock.git"
-def gitBranch = "jenkins/test-field"
 
 pipeline {
     agent any
@@ -19,12 +17,12 @@ pipeline {
                 }
             }
         }
-        stage('Create Image Builder') {
+        stage('Create Application Template') {
             when {
                 expression {
                     openshift.withCluster() {
-                    openshift.withProject("${cicdProjectNamespace}") {
-                        return !openshift.selector("bc", "${applicationName}").exists();
+                        openshift.withProject("${cicdProjectNamespace}") {
+                            return !openshift.selector("template", "${applicationName}").exists();
                         }
                     }
                 }
@@ -33,7 +31,7 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject("${cicdProjectNamespace}") {
-                            openshift.newBuild("--name=${applicationName}", "--strategy=docker", "${gitRepo}#${gitBranch}")
+                            openshift.newApp(template, "-p APPLICATION_NAME=${applicationName}")
                         }
                     }
                 }
@@ -45,32 +43,6 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject("${cicdProjectNamespace}") {
                             openshift.selector("bc", "${applicationName}").startBuild("--wait=true")
-                        }
-                    }
-                }
-            }
-        }
-        stage('Deploy Image') {
-            when {
-                expression {
-                    openshift.withCluster() {
-                    openshift.withProject("${cicdProjectNamespace}") {
-                            return !openshift.selector('dc', "${applicationName}").exists()
-                        }
-                    }
-                }
-            }
-            steps {
-                script {
-                    openshift.withCluster() {
-                        openshift.withProject("${cicdProjectNamespace}") {
-                            sh """
-                            oc new-app ${applicationName}   \
-                            -e HOST=localhost   \
-                            -e PKEY=/dist/cert_and_key/privatekey.pem   \
-                            -e SSLCERT=/dist/cert_and_key/certificate.crt   \
-                            -e SSO_DOMAIN=.test.services.jtech.se
-                            """
                         }
                     }
                 }
