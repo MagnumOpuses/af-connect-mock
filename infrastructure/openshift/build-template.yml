@@ -89,11 +89,6 @@ parameters:
         generate: expression
         from: '[a-zA-Z0-9]{40}'
     -
-        name: REDIS_HOST
-        displayName: 'Redis DB Hostname'
-        description: 'The hostname for connecting with Redis DB'
-        value: redis-db
-    -
         name: HOST
         value: localhost
     -
