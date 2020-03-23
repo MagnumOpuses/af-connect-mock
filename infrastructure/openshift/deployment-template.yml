@@ -144,10 +144,10 @@ parameters:
         value: localhost
     -
         name: PKEY
-        value: '/dist/cert_and_key/privatekey.pem'
+        value: '/cert_and_key/privatekey.pem'
     -
         name: SSLCERT
-        value: '/dist/cert_and_key/certificate.crt'
+        value: '/cert_and_key/certificate.crt'
     -
         name: SSO_DOMAIN
         value: '.test.services.jtech.se'
