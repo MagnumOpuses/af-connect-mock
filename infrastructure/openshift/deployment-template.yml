@@ -1,11 +1,11 @@
 kind: Template
 apiVersion: v1
 metadata:
-    name: af-connect-outbox
+    name: af-connect-mock
     annotations:
-        openshift.io/display-name: 'AF-Connect Outbox with Redis'
-        description: "An Node.js application with a Redis database."
-        tags: 'nodejs,redis,cache'
+        openshift.io/display-name: 'AF-Connect Mock PISA Service.'
+        description: "A Node.js application with a Postgres database."
+        tags: 'nodejs,postgres,mock'
         iconClass: icon-nodejs
         openshift.io/documentation-url: '${SOURCE_REPOSITORY_URL}'
 labels:
@@ -84,7 +84,7 @@ parameters:
         displayName: Name
         description: 'The name assigned to all of the frontend objects defined in this template.'
         required: true
-        value: af-connect-outbox
+        value: af-connect-mock
     -
         name: APPLICATION_PORT
         displayName: Port
@@ -125,7 +125,3 @@ parameters:
         description: 'A secret string used to configure the Generic webhook.'
         generate: expression
         from: '[a-zA-Z0-9]{40}'
-    -   
-        name: REDIS_HOST
-        description: 'Hostname to connect with the Redis DB service'
-        value: 'redis-db'

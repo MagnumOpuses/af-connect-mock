@@ -38,8 +38,17 @@ objects:
                 dockerStrategy:
                     env:
                         -
-                            name: REDIS_HOST
-                            value: '${REDIS_HOST}'
+                            name: HOST
+                            value: '${HOST}'
+                        -
+                            name: PKEY
+                            value: '${PKEY}'
+                        -
+                            name: SSLCERT
+                            value: '${SSLCERT}'
+                        -
+                            name: SSO_DOMAIN
+                            value: '${SSO_DOMAIN}'
             output:
                 to:
                     kind: ImageStreamTag
