@@ -83,12 +83,6 @@ objects:
                                     name: HOST
                                     value: '${HOST}'
                                 -
-                                    name: PKEY
-                                    value: '${PKEY}'
-                                -
-                                    name: SSLCERT
-                                    value: '${SSLCERT}'
-                                -
                                     name: SSO_DOMAIN
                                     value: '${SSO_DOMAIN}'
                     restartPolicy: Always
