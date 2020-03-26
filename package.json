@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "check-connectivity": "git+https://git@github.com/MagnumOpuses/check-connectivity.git",
+    "check-connectivity": "git+https://git@github.com/MagnumOpuses/check-connectivity.git#8a073c1",
     "check-dependencies": "^1.1.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
