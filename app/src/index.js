@@ -22,14 +22,12 @@ health = new Health({
   }
 }).listen();
 
-const privateKey = fs.readFileSync(
-  path.resolve(__dirname, config.pkey),
-  "utf8"
-);
-const certificate = fs.readFileSync(
-  path.resolve(__dirname, config.sslcert),
-  "utf8"
-);
+const privateKey = fs.existsSync(path.resolve(__dirname, config.pkey))
+                    ? fs.readFileSync(path.resolve(__dirname, config.pkey), "utf8")
+                    : config.pkey;
+const certificate = fs.existsSync(path.resolve(__dirname, config.sslcert))
+                    ? fs.readFileSync(path.resolve(__dirname, config.sslcert), "utf8")
+                    : config.sslcert;
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(
   { key: privateKey, cert: certificate },
