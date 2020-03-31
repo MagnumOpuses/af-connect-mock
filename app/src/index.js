@@ -12,8 +12,12 @@ const credentials = require("./dataset-mock");
 const http = require("http");
 const https = require("https");
 
-const privateKey = config.pkey;
-const certificate = config.sslcert;
+const privateKey = fs.existsSync(path.resolve(__dirname, config.pkey))
+                    ? fs.readFileSync(path.resolve(__dirname, config.pkey), "utf8")
+                    : config.pkey;
+const certificate = fs.existsSync(path.resolve(__dirname, config.sslcert))
+                    ? fs.readFileSync(path.resolve(__dirname, config.sslcert), "utf8")
+                    : config.sslcert;
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(
   { key: privateKey, cert: certificate },
