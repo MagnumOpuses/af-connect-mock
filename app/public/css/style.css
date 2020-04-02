@@ -1,6 +1,5 @@
 input {
-  border: 1px solid black;
-  border-radius: 6px;
+  border: 1px solid #666;
   padding: 6px;
   width: 100%;
 }
@@ -20,40 +19,12 @@ form {
 }
 
 button {
-  margin: 0px;
-  padding: 6px;
-  width: 100%;
-  background-color: #3faf11;
-  border: 1px solid black !important;
-  border-radius: 6px;
-  border: 0px;
+  background-color: #00005a;
   color: white;
-  font-weight: 700;
-}
-
-.login-container {
-  width: 300px;
-  border: 1px solid black;
-  border-radius: 6px;
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.login-header {
-  text-align: center;
-}
-
-.login-row {
-  margin: 6px;
-  padding: 6px;
-  border: 1px solid black;
-  border-radius: 6px;
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.input-row {
-  margin: 6px 0px;
-}
-
-.full-width {
-  width: 100%;
+  border: #00005a solid 1px;
+  border-radius: 4px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }

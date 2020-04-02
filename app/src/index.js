@@ -43,7 +43,10 @@ app.engine("html", ejs.__express);
 app.use(bodyParser.text({ type: "application/json" }));
 
 app.use("/css", express.static(__dirname + "/../public/css"));
+app.use("/img", express.static(__dirname + "/../public/img"));
 app.use("/js", express.static(__dirname + "/../public/js"));
+app.use("/vendor", express.static(__dirname + "/../public/vendor"));
+app.use("/favicon.ico", express.static(__dirname + "/../public/favicon.ico"));
 
 app.use(logger);
 

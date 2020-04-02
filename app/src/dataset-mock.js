@@ -1,7 +1,7 @@
 module.exports = [
   {
-    username: "abc",
-    password: "123",
+    username: "nina_g",
+    password: "Abcd1234",
     sso:
       "AAAAAgABAFj4ln2iVU1mXuYsKUgBIoG%2F4wTm5ech%2F5gEP7%2BXF8L9Ut7aGGWPgP6JU5xwYAqHaS520TxGXL7spoFbiYzOndbkp5ojVWKWJXL0IvfASbQoZWJ15Mqxy1p7",
     jwt: {
