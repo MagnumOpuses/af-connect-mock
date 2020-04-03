@@ -3,6 +3,7 @@ FROM node:10-alpine
 # Create app directory
 WORKDIR /dist
 RUN apk update
+RUN apk add --no-cache --update -v git
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
@@ -16,5 +17,6 @@ RUN npm install
 EXPOSE 9999
 #API http
 EXPOSE 9998
+EXPOSE 9803
 
 CMD [ "npm", "run-script", "start" ]

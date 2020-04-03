@@ -1,6 +1,6 @@
 {
   "name": "af-connect-mock",
-  "version": "1.0.1-beta",
+  "version": "1.1.0-beta",
   "description": "",
   "repository": {
     "type": "git",
@@ -16,11 +16,16 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "check-connectivity": "git+https://git@github.com/MagnumOpuses/check-connectivity.git",
+    "check-dependencies": "^1.1.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
+    "express-winston": "^4.0.3",
     "jsonwebtoken": "^8.5.1",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "semver": "^7.1.3",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.1"

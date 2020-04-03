@@ -1,39 +1,136 @@
 <html>
   <head>
-    <title>AF-Connect mock IdP</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel=”stylesheet”
+    href=”https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link
+      href="/vendor/bootstrap-4.3.1-dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link href="/css/style.css" rel="stylesheet"/>
+    <title>AF-Connect mock IdP</title>
+    <style>
+      body {
+        background-color: #ffffff;
+      }
+    </style>
   </head>
   <body style="margin: 0px">
-      <div
-        style="background-color: #aaa; color: #eee; font-weight: 600; padding:4px; text-align: center"
-      >
-        This page does not operate on production data. Find more information at
-        <a
-          style="color: #fff"
-          href="https://github.com/MagnumOpuses/af-connect-module"
-          >https://github.com/MagnumOpuses/af-connect-module</a
-        >
+    <div style="background-color: white; border-bottom: 1px solid #e8edf0;">
+      <div class="container">
+        <div class="row" style="height: 69px">
+          <div class="col-md-12">
+            <img
+              src="/img/af-logo.svg"
+              style="position: relative; top: 50%; transform: translateY(-50%)"
+            />
+          </div>
+        </div>
       </div>
-    <div class="login-container">
-      <form onsubmit="onLogin(); return false;">
-        <div class="login-row">
-          <div class="login-header">
-            <h1>AF-Connect</h1>
-            <h2>Mock IdP</h2>
+    </div>
+
+      
+    <div style="background-color: white">
+      <div class="container">
+        <div class="row" style="height: 130px">
+          <div class="col-md-12" style="color: black; text-align: left;">
+            <div
+              style="position: relative; top: 50%; transform: translateY(-50%)"
+            >
+              <div style="font-size: 30pt; font-weight: 500">
+                Logga in med användarnamn och lösenord
+              </div>
+            </div>
           </div>
         </div>
-        <div class="login-row">
-          <div class="input-row">
-            <input id="username" type="text" placeholder="Enter username"></input>
-          </div>
-          <div class="input-row">
-            <input id="password" type="text" placeholder="Enter password"></input>
+        <div class="row">
+          <div class="col-md-12">
+            <div style="border-bottom: 1px solid #00005a; margin-bottom: 32px">
+              <div style="float: left; padding: 16px; border-bottom: 6px solid #00005a">
+                Arbetssökande
+              </div>
+              <div style="float: left; padding: 16px; border-bottom: 6px solid white">
+                Arbetsgivare
+              </div>
+              <div style="clear:both"></div>
+            </div>
           </div>
         </div>
-        <div class="login-row">
-          <button type="submit">LOGIN</button>
+        <div class="row">
+          <div class="col-md-5">
+            <form onsubmit="onLogin(); return false;">
+              <div style="padding-top: 12px;">Användarnamn</div>
+              <div>
+                <input id="username" type="text" placeholder=""></input>
+              </div>
+              <div style="padding-top: 12px;">Lösenord</div>
+              <div>
+                <input id="password" type="password" placeholder=""></input>
+              </div>
+              <div style="padding-top: 12px; padding-bottom: 12px;">
+                <button type="submit">Logga in</button>
+              </div>
+            </form>
+          </div>
         </div>
-      </form>
+        <div class="row">
+          <div class="col-md-7">
+            <div style="color: #1616b2; margin-top: 6px; margin-bottom: 6px">
+              > Glömt ditt användarnamn eller lösenord?
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-7">
+            <div style="color: #1616b2; margin-top: 6px; margin-bottom: 6px">
+              > Avbryt och byt inloggningssätt
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-7">
+            <div style="margin-top: 32px; margin-bottom: 6px">
+              <strong>Saknar du konto?</strong>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-7">
+            <div style="margin-top: 6px; margin-bottom: 6px">
+              Med ett konto får du snabbare och bättre service. Smidigaste sättet att skapa ett konto är att logga in med din e-legitimation. Det tar bara några minuter att skaffa!
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-7">
+            <div style="margin-top: 32px; margin-bottom: 6px">
+              <strong>Har du problem att logga in?</strong>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-7">
+            <div style="margin-top: 6px; margin-bottom: 128px">
+              Om du har problem att logga in med användarnamn och lösenord, börja med att kontrollera att du inte har versallåset caps lock på. Både lösenord och användarnamn känner skillnad på stora och små bokstäver.<br>
+              <br>
+              Om du kopierar och klistrar in ditt användarnamn eller lösenord kan det ibland följa med blanksteg i det du kopierar. Då är det bättre att skriva in uppgifterna för hand istället.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="background-color: #00005a">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 p-2">
+            <div style="padding-top: 33px; padding-bottom: 46px">
+              <img src="/img/af-logo-white.svg" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="/js/main.js"></script>
   </body>

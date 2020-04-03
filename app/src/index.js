@@ -11,9 +11,25 @@ const auth = require("./auth");
 const credentials = require("./dataset-mock");
 const http = require("http");
 const https = require("https");
+const logger = require("../lib/logger");
 
-const privateKey = fs.readFileSync(path.resolve(__dirname, config.pkey), "utf8");
-const certificate = fs.readFileSync(path.resolve(__dirname, config.sslcert), "utf8");
+const Health = require("check-connectivity");
+health = new Health({
+  host: config.host,
+  port: config.healthPort,
+  debug: true,
+  compatibleWith: {
+    "af-connect": "^1.0.0-beta",
+    "af-portability": "^1.0.0-beta"
+  }
+}).listen();
+
+const privateKey = fs.existsSync(path.resolve(__dirname, config.pkey))
+  ? fs.readFileSync(path.resolve(__dirname, config.pkey), "utf8")
+  : config.pkey;
+const certificate = fs.existsSync(path.resolve(__dirname, config.sslcert))
+  ? fs.readFileSync(path.resolve(__dirname, config.sslcert), "utf8")
+  : config.sslcert;
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(
   { key: privateKey, cert: certificate },
@@ -27,10 +43,14 @@ app.engine("html", ejs.__express);
 app.use(bodyParser.text({ type: "application/json" }));
 
 app.use("/css", express.static(__dirname + "/../public/css"));
+app.use("/img", express.static(__dirname + "/../public/img"));
 app.use("/js", express.static(__dirname + "/../public/js"));
+app.use("/vendor", express.static(__dirname + "/../public/vendor"));
+app.use("/favicon.ico", express.static(__dirname + "/../public/favicon.ico"));
+
+app.use(logger);
 
 app.get("/AuthenticationDispatcher/Dispatch", (req, res, next) => {
-  console.log("Return Login page");
   res.render("pages/login");
 });
 
@@ -44,7 +64,6 @@ app.post("/AuthenticationDispatcher/Dispatch", (req, res, next) => {
         credential.password === json.password
     );
     if (user !== undefined) {
-      console.log("AUTH -> SSO for user", user.username);
       resolve({ status: 200, message: user });
     } else {
       resolve({ status: 401, message: "Invalid login" });
@@ -75,7 +94,6 @@ app.get("/jwt/rest/idp/v0/klientID", (req, res, next) => {
   return new Promise((resolve, reject) => {
     const user = credentials.find(credential => credential.sso === sso);
     if (user !== undefined) {
-      console.log("SSO -> JWT for user: ", user.username);
       res.send(user.jwt);
     } else {
       res.status(401).send("Invalid sso cookie");
@@ -92,7 +110,6 @@ app.get(
         credential => credential.jwt.token === jwtToken
       );
       if (user !== undefined) {
-        console.log("JWT -> jobSeekerProfile for user: ", user.username);
         res.send(user.jobSeekerProfile);
       } else {
         res.status(401).send("Invalid sso cookie");
@@ -110,7 +127,6 @@ app.get(
         credential => credential.jwt.token === jwtToken
       );
       if (user !== undefined) {
-        console.log("JWT -> externalPersonalDetails for user: ", user.username);
         res.send(user.externalPersonalDetails);
       } else {
         res.status(401).send("Invalid sso cookie");
@@ -119,19 +135,19 @@ app.get(
   }
 );
 
-if (config.HOST === "localhost") {
-  httpsServer.listen(config.SSL_PORT, () =>
-      console.log(`AF Connect Mock listening on port: ${config.SSL_PORT} !`)
+if (config.host === "localhost") {
+  httpsServer.listen(config.sslPort, () =>
+    console.log(`AF Connect Mock listening on port: ${config.sslPort} !`)
   );
-  httpServer.listen(config.PORT, () =>
-      console.log(`AF Connect Mock listening on port: ${config.PORT} !`)
+  httpServer.listen(config.port, () =>
+    console.log(`AF Connect Mock listening on port: ${config.port} !`)
   );
 } else {
-  httpsServer.listen(config.SSL_PORT, config.HOST, () =>
-      console.log(`AF Connect Mock listening on port: ${config.SSL_PORT} !`)
+  httpsServer.listen(config.sslPort, config.host, () =>
+    console.log(`AF Connect Mock listening on port: ${config.sslPort} !`)
   );
-  httpServer.listen(config.PORT, config.HOST, () =>
-      console.log(`AF Connect Mock listening on port: ${config.PORT} !`)
+  httpServer.listen(config.port, config.host, () =>
+    console.log(`AF Connect Mock listening on port: ${config.port} !`)
   );
 }
 

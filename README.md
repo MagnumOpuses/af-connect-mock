@@ -16,7 +16,7 @@ Operating this mocking service in development mode utilizes [Nodemon](https://no
 
 ## Versions, current dev state and future
 
-1.0.1-beta
+1.1.0-beta
 
 ## Getting started
 
