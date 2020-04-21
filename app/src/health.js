@@ -1,4 +1,4 @@
-const http = require("http");
+/*const http = require("http");
 const express = require("express");
 const app = express();
 const semver = require("semver");
@@ -63,3 +63,4 @@ const startServer = options => {
 };
 
 module.exports = { startServer };
+*/
