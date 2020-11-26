@@ -1,5 +1,31 @@
 module.exports = [
   {
+    username: "agda_a",
+    password: "123456qwerty",
+    sso:
+      "BBB",
+    jwt: {
+      token:
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhZi1qd3QtaWRwOmtsaWVudElEIiwia29uc3VtZW50aWQiOiJrbGllbnRJRCIsImFrdG9yc3JvbGwiOiJhcmJldHNzw7ZrYW5kZSIsInRpbGxpdHNuaXZhIjoiMiIsImV4cCI6MTU3NTQwODM0OCwicm9sbGVyIjpbIlBFUlNPTk5VTU1FUjoxOTM3MDMwMzEyMzMiLCJQSVNBX0lEOmFnZGFfYSJdLCJzdWIiOiI4MTk5NDc2NCIsImF1ZCI6WyJtaW5wcm9maWwiXSwib3JnbnIiOiIifQ.rHgBhe5ZUD9z73BCD6oKAhPNpzztkrb952468Df9PPULQg7m7ih2x8Pzsup6pW-z5sAKjPkudwERdGiKoIkP4u9NhsdoW8gDI-roS1WzZjphmDC8uWj7mQC2kPNZTeumAYINaX9WyGdm5Py4vA3SZaEYLCKsSkA44p981Jzxr3lXdFVa_tAQ9ykET2twFqDti06MEwC7xN_3OTnp52emVfOITYRjIX6CRgsoaczZ6cKUUqLdoH1xkGhB5iHte-C-LzxSdsrMsmwyT_bxY-7AjaHD9e7FQ_td0_aW-k1vsSXBrkDjtAZxotWO2eZ3s6eCanLr6jwEnfB9x7yp9H3gNw"
+    },
+    externalPersonalDetails: {
+      kundnummer: "1237678",
+      personnummer: "1937-03-03-1233",
+      fornamn: "Agda",
+      efternamn: "Andersson",
+      adress: "Bråvägen 37",
+      co: "test",
+      postnummer: "76272",
+      postort: "Nida",
+      land: "SE",
+      telefonnummerHem: "09283123",
+      epostadress: "agda@test.se",
+      hemsida: null
+    },
+    jobSeekerProfile: [
+    ]
+  },
+  {
     username: "nina_g",
     password: "Abcd1234",
     sso:
