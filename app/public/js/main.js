@@ -35,6 +35,9 @@ const onLogin = () => {
             const sld = split.slice(split.length - 2).join(".");
             cookie += ";domain=." + sld;
           }
+
+          cookie += ";SameSite=None;Secure"; // Just an experiment
+
           document.cookie = cookie;
 
           if (CT_ORIG_URL) {
